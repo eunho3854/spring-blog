@@ -26,6 +26,7 @@ public class PrincipalDetailsService implements UserDetailsService{
 			return null;
 		} else {
 			// 내부적으로 세션이 생김
+			// 권한 체크를 다 해줌
 			return new PrincipalDetails(principal);
 		}
 	}
