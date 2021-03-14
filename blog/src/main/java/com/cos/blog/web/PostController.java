@@ -25,8 +25,11 @@ public class PostController {
 	
 	
 	@GetMapping("/")
-	public String findAll(Model model, @PageableDefault(sort = "id", direction = Sort.Direction.DESC, size = 5) Pageable pageable) {
+	public String findAll(Model model, @PageableDefault(sort = "id", direction = Sort.Direction.DESC, size = 5) Pageable pageable,
+			@AuthenticationPrincipal PrincipalDetails principalDetails) {
 		
+		System.out.println("누구로 로그인 됐을까? " + principalDetails.isOAuthLogin());
+		System.out.println("누구로 로그인 됐을까? " + principalDetails.isOauth());
 		Page<Post> posts = postService.전체찾기(pageable);
 		
 		// 모델에 담는 것은리퀘스트 디스패쳐에 담고 포워딩한 거랑 똑같음
