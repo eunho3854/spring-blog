@@ -82,18 +82,17 @@
 		});
 	});
 	
-	function deleteReply(replyId) {
+	function deleteReply(id) {
 		$.ajax({
 			type: "DELETE",
 			url: "/reply/"+id,
-			data: JSON.stringify(data),
 			dataType: "json"
 		}).done((res)=>{
 			console.log(res);
 			if(res.statusCode === 1){
 				$("#reply-"+id).remove();
 			}else{
-				alert("수정에 실패하였습니다.");
+				alert("삭제에 실패하였습니다.");
 			}
 		});
 	}

@@ -60,12 +60,10 @@ public class Post {
 	// post가 무한 참조되므로 @JsonIgnoreProperties 사용, dto 써도 됨.
 	// 내가 post를 다이렉트로 select할 때는 사용하지 않는다 @OrderBy
 	@OneToMany(mappedBy = "post", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE) // Post가 Many, User가 One
-	@JoinColumn(name = "replyId")
 	@JsonIgnoreProperties({"post"})
 	@OrderBy("id desc")
 	private List<Reply> replys;
 	
 	@CreationTimestamp
 	private Timestamp createDate;
-	
 }
