@@ -30,8 +30,9 @@
 		<!-- 댓글 시작 -->
 	<div class="card">
 	    <form>
+	    <input type="hidden" id="postId" value="${post.id}" />
 			<div class="card-body">
-				<textarea id="reply-content" class="form-control" rows="1"></textarea>
+				<textarea name="content" id="reply-content" class="form-control" rows="1"></textarea>
 			</div>
 			<div class="card-footer">
 				<button type="button" id="btn-reply-save" class="btn btn-primary">등록</button>
@@ -64,6 +65,30 @@
 </div>
 
 <script>
+
+$("#btn-reply-save").on("click", (e) => {
+	e.preventDefault();
+	let data = {
+			postId: $("#postId").val(),
+			content: $("#reply-content").val()
+		};
+		
+		$.ajax({
+			type: "POST",
+			url: "/reply",
+			data: JSON.stringify(data),
+			contentType: "application/json; charset=utf-8",
+			dataType: "JSON"
+		}).done((res)=>{
+			console.log(res);
+			if(res.statusCode === 1){
+				location.reload();
+			}else{
+				alert("댓글 작성에 실패하였습니다.");
+			}
+		});
+});
+
 	$("#btn-delete").on("click", (e) => {
 		let id = e.currentTarget.value;
 		
@@ -85,7 +110,7 @@
 	function deleteReply(id) {
 		$.ajax({
 			type: "DELETE",
-			url: "/reply/"+id,
+			url: "/reply/" + id,
 			dataType: "json"
 		}).done((res)=>{
 			console.log(res);
