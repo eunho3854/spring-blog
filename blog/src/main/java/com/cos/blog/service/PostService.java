@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.cos.blog.domain.post.Post;
 import com.cos.blog.domain.post.PostRepository;
+import com.cos.blog.domain.post.dto.PostSaveReqDto;
 
 import lombok.RequiredArgsConstructor;
 
@@ -25,4 +26,21 @@ public class PostService {
 	public Post 글쓰기(Post post) {
 		return postRepository.save(post);
 	}
+	
+	@org.springframework.transaction.annotation.Transactional(readOnly = true)
+	public Post 상세보기(int id) {
+		return postRepository.findById(id).get();
+	}
+	
+	@Transactional
+	public void 삭제하기(int id) {
+		postRepository.deleteById(id);
+	}
+	
+	@Transactional
+	public void 수정하기(int id, PostSaveReqDto postSaveReqDto) {
+		Post postEntity = postRepository.findById(id).get();
+		postEntity.setTitle(postSaveReqDto.getTitle());
+		postEntity.setContent(postSaveReqDto.getContent());
+	} // 더티체킹
 }

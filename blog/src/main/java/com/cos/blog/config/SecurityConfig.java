@@ -33,7 +33,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 		// "/user", "/post" 빼고 다 열어준다는 뜻
 		// /user/** -> /user 내부까지 다
 		http.authorizeRequests()
-			.antMatchers("/user/**", "/post/**").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')") // 유저나 어드민 권한이 있어야지만 가능. ROLE_는 강제성이 있음. 롤 검증시
+			.antMatchers("/user/**", "/post/**", "/reply/**").access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')") // 유저나 어드민 권한이 있어야지만 가능. ROLE_는 강제성이 있음. 롤 검증시
 			.antMatchers("/admin/**").access("hasRole('ROLE_ADMIN')") // ADMIN만 접속이 가능하게
 			.anyRequest().permitAll()
 			.and()
