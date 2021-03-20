@@ -29,7 +29,9 @@ public class PostService {
 	
 	@org.springframework.transaction.annotation.Transactional(readOnly = true)
 	public Post 상세보기(int id) {
-		return postRepository.findById(id).get();
+		return postRepository.findById(id).orElseThrow(() -> {
+			return new IllegalArgumentException("id를 찾을 수 없습니다.");
+		});
 	}
 	
 	@Transactional
@@ -39,7 +41,9 @@ public class PostService {
 	
 	@Transactional
 	public void 수정하기(int id, PostSaveReqDto postSaveReqDto) {
-		Post postEntity = postRepository.findById(id).get();
+		Post postEntity = postRepository.findById(id).orElseThrow(() -> {
+			return new IllegalArgumentException("id를 찾을 수 없습니다.");
+		});
 		postEntity.setTitle(postSaveReqDto.getTitle());
 		postEntity.setContent(postSaveReqDto.getContent());
 	} // 더티체킹

@@ -51,7 +51,7 @@ public class PostController {
 		Post postEntity = postService.상세보기(id);
 		model.addAttribute("post", postEntity);
 		
-		return "/post/detail"; // String이니까 ViewResolver가 발동
+		return "post/detail"; // String이니까 ViewResolver가 발동
 	}
 	
 	@PostMapping("/post")
@@ -73,7 +73,7 @@ public class PostController {
 	@DeleteMapping("/post/{id}")
 	public @ResponseBody CMRespDto<?> deleteById(@PathVariable int id) {
 		postService.삭제하기(id);
-		return new CMRespDto<>(1, null);
+		return new CMRespDto<>(1,"성공", null);
 	}
 	
 	@GetMapping("/post/{id}/updateForm")
@@ -86,6 +86,6 @@ public class PostController {
 	@PutMapping("/post/{id}")
 	public @ResponseBody CMRespDto<?> update(@PathVariable int id, @RequestBody PostSaveReqDto postSaveReqDto) {
 		postService.수정하기(id, postSaveReqDto);
-		return new CMRespDto<>(1, null);
+		return new CMRespDto<>(1,"성공", null);
 	}
 }

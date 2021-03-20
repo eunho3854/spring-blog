@@ -20,11 +20,14 @@ public class UserService {
 	
 	@Transactional
 	public User 회원수정(int id, UserUpdateReqDto userUpdateReqDto) {
-		User userEntity = userRepository.findById(id).get(); // 1차 캐시
+		User userEntity = userRepository.findById(id).orElseThrow(() -> {
+			return new IllegalArgumentException("id를 찾을 수 없습니다.");
+		});// 1차 캐시
 		String encPassword = bCryptPasswordEncoder.encode(userUpdateReqDto.getPassword());
 		
 		userEntity.setPassword(encPassword);
 		userEntity.setEmail(userUpdateReqDto.getEmail());
 		return userEntity;
 	} // 더티체킹
+	
 }

@@ -1,9 +1,8 @@
 package com.cos.blog.service;
 
-import javax.transaction.Transactional;
-
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.cos.blog.domain.user.RoleType;
 import com.cos.blog.domain.user.User;

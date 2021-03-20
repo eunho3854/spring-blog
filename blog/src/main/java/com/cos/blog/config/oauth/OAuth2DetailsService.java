@@ -77,10 +77,10 @@ public class OAuth2DetailsService extends DefaultOAuth2UserService{
 					.role(RoleType.USER)
 					.build();
 			userEntity = userRepository.save(user);
-			return new PrincipalDetails(userEntity, oAuth2User.getAttributes(), false);
+			return new PrincipalDetails(userEntity, oAuth2User.getAttributes());
 		} else { // 회원가입이 완료 됐다는 뜻 (원래는 구글 정보가 변경될 수 있기 때문에 update 해야하는데 지금은 안 하겠음)
 			System.out.println("회원정보가 있습니다. 바로 로그인 합니다.");
-			return new PrincipalDetails(userEntity, oAuth2User.getAttributes(), true);
+			return new PrincipalDetails(userEntity, oAuth2User.getAttributes());
 		}
 	}
 }

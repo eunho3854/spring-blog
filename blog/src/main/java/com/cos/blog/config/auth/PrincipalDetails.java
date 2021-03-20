@@ -33,10 +33,10 @@ public class PrincipalDetails implements UserDetails, OAuth2User{
 
 	
 	
-	public PrincipalDetails(User user,  Map<String, Object> attributes, boolean oauth) {
+	public PrincipalDetails(User user,  Map<String, Object> attributes) {
 		this.user = user;
 		this.attributes = attributes;
-		this.oauth = oauth;
+		this.oauth = true;
 	}
 	
 	public Boolean isOAuthLogin() {

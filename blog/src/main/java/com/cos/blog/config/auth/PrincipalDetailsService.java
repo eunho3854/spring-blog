@@ -20,7 +20,7 @@ public class PrincipalDetailsService implements UserDetailsService{
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		System.out.println("/login 이 호출되면 자동 실행되어 username이 DB에 있는지 확인한다.");
 		User principal = userRepository.findByUsername(username);
-		
+		System.out.println("프린시펄 : " + principal);
 		if(principal == null) {
 			// 인증 실패
 			return null;

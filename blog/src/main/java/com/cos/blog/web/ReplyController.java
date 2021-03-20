@@ -25,7 +25,7 @@ public class ReplyController {
 	public CMRespDto<?> deleteById(@PathVariable int id, @org.springframework.security.core.annotation.AuthenticationPrincipal PrincipalDetails principalDetails) {
 		// 모든 컨트롤러에 삭제하기, 수정하기는 무조건 동일인물이 로그인 했는지 확인 !!
 		int result = replyService.삭제하기(id, principalDetails.getUser().getId());
-		return new CMRespDto<>(result, null);
+		return new CMRespDto<>(result, "성공", null);
 	}
 	
 	@PostMapping("/reply")
@@ -38,9 +38,9 @@ public class ReplyController {
 		Reply replyEntity = replyService.댓글쓰기(replySaveReqDto);
 		
 		if(replyEntity == null) {
-			return new CMRespDto<>(-1, null);
+			return new CMRespDto<>(-1, "실패", null);
 		} else {
-			return new CMRespDto<>(1, replyEntity);
+			return new CMRespDto<>(1, "성공", replyEntity);
 		}
 	}
 	

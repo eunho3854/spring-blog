@@ -3,6 +3,7 @@ package com.cos.blog.web;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -17,6 +18,7 @@ import com.cos.blog.web.user.dto.UserUpdateReqDto;
 
 import lombok.RequiredArgsConstructor;
 
+@CrossOrigin
 @RequiredArgsConstructor
 @Controller
 public class UserController {
@@ -44,7 +46,7 @@ public class UserController {
 //		SecurityContextHolder.getContext().setAuthentication(authentication);
 		
 		
-		return new CMRespDto<>(1, null);
+		return new CMRespDto<>(1,"성공", null);
 	}
 	
 	@GetMapping("/user")
